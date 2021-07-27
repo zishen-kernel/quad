@@ -1,0 +1,22 @@
+# version 330
+
+in vec2 v_texture;
+in vec3 v_color;
+
+out vec4 out_color;
+
+uniform sampler2D sampler;
+uniform int use_color;
+
+void main()
+{
+   if(use_color == 1)
+   {
+       out_color = vec4(v_color, 1.0);   
+
+   }
+   else
+   {
+       out_color = texture(sampler, v_texture);   
+   }
+}
