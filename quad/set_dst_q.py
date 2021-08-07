@@ -4,7 +4,7 @@ import struct
 import util
 
 def run(s):
-    data, info = get_info.get_info(s)
+    data, info = util.get_info(s)
     data_fusion_q = info['data_fusion_q']
 
     q = data_fusion_q

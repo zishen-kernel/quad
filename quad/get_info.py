@@ -46,12 +46,26 @@ def show_pwms(info):
 def show_power_volt(info):
     print 'power volt: %.2f ' % info['power_volt']
 
+def show_mag(info):
+    mag = util.get_mag(info)
+    print 'mag: %d, %d, %d' % (mag[0], mag[1], mag[2])
+
+def show_mag_acc_quality(info):
+    quality = info['mag_acc_quality']
+    print 'mag_acc_quality: %f' % quality
+
+def show_mag_normal(info):
+    n = info['mag_normal']
+    print 'mag_normal: %.3f, %.3f, %.3f' % (n[0], n[1], n[2])
 
 def show_info(info):
     print ''
     print '*********************'
     print 'tick: %.2f  control_n: %.2f' % (info['tick'], info['control_n'])
 
+    show_mag(info)
+    show_mag_acc_quality(info)
+    show_mag_normal(info)
     show_angle(info)
     show_pid_acc(info)
     show_para(info)
@@ -67,6 +81,8 @@ def run(s):
 
     while True:
         data, info = util.get_info(s)
+        print 'qqqqqqqq'
+        print info['data_fusion_q']
         if info == 0:
             time.sleep(0.01)
             continue

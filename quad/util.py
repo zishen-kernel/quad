@@ -1,7 +1,7 @@
 import struct
 import socket
 
-INFO_LEN = 256
+INFO_LEN = 268
 
 
 def unpack_info(data):
@@ -22,6 +22,15 @@ def unpack_info(data):
 
     info['acc'] = r[:3]
     r = r[3:]
+
+    info['magx'] = r[0]
+    r = r[1:]
+
+    info['magy'] = r[0]
+    r = r[1:]
+
+    info['magz'] = r[0]
+    r = r[1:]
 
     info['mag_acc_quality'] = r[0]
     r = r[1:]
@@ -187,6 +196,10 @@ def get_pwm(infos):
 
     return pwms
 
+def get_mag(infos):
+    mag = [infos['magx'], infos['magy'], infos['magz']]
+    return mag
+
 def get_gyro(infos):
     gyro = [[], [], []]
 
@@ -233,7 +246,7 @@ def get_info(s):
     if len(data) == 1:
         return '0', 0
 
-    if len(data) != 256:
+    if len(data) != INFO_LEN:
         print 'error: data len is %d' % len(data)
 
     info = unpack_info(data)
